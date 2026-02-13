@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Секретный валентин 💌</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fce4e8 0%, #fed9e5 50%, #ffe4ec 100%);
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 1rem;
+        }
+
+        /* Полупрозрачные сердечки на фоне (падающие) */
+        .falling-heart {
+            position: fixed;
+            color: rgba(255, 105, 135, 0.25);
+            font-size: 1.8rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            animation: fallDown linear infinite;
+            top: -10%;
+        }
+
+        @keyframes fallDown {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* Главный контейнер (как конвертик) */
+        .envelope {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 60px 60px 40px 40px;
+            padding: 3rem 2rem;
+            box-shadow: 0 30px 50px rgba(210, 80, 120, 0.3), 
+                        0 10px 25px rgba(0,0,0,0.1),
+                        inset 0 2px 10px rgba(255,255,255,0.8);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        /* Ленточка сверху (декор) */
+        .ribbon {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff8da1;
+            color: white;
+            padding: 0.7rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 0 #b54763, 0 10px 15px rgba(0,0,0,0.1);
+            border: 2px solid #ffe2e8;
+            white-space: nowrap;
+        }
+
+        .ribbon::before, .ribbon::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            width: 20px;
+            height: 20px;
+            background: #ff8da1;
+            border-radius: 0 0 20px 20px;
+            border: 2px solid #ffe2e8;
+            border-top: none;
+        }
+
+        .ribbon::before {
+            left: 5px;
+            transform: rotate(40deg);
+        }
+
+        .ribbon::after {
+            right: 5px;
+            transform: rotate(-40deg);
+        }
+
+        /* Главное сердечко с ручками (обнимает) */
+        .heart-hug {
+            font-size: 7rem;
+            line-height: 1;
+            filter: drop-shadow(0 10px 10px #ffb6c1);
+            margin: 1rem 0 0.5rem;
+            position: relative;
+            display: inline-block;
+            animation: hug 3s infinite ease-in-out;
+        }
+
+        @keyframes hug {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            33% { transform: scale(1.1) rotate(-3deg); }
+            66% { transform: scale(1.05) rotate(3deg); }
+        }
+
+        .heart-hug span {
+            font-size: 2.5rem;
+            position: absolute;
+        }
+
+        .heart-hug span:first-child {
+            left: -30px;
+            top: 30px;
+            transform: rotate(-30deg);
+        }
+
+        .heart-hug span:last-child {
+            right: -30px;
+            top: 30px;
+            transform: rotate(30deg);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #b53b5c;
+            text-shadow: 2px 2px 0 #ffe2ec;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-badge {
+            background: #ffb3c6;
+            color: #6b2e41;
+            padding: 0.4rem 1.5rem;
+            border-radius: 100px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 0 #e07a97;
+        }
+
+        .poem-box {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 1.8rem 0;
+            border: 3px dashed #ff98af;
+            position: relative;
+        }
+
+        .poem-box p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #4b2e38;
+            font-weight: 500;
+        }
+
+        .poem-box .signature {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #c94f6f;
+        }
+
+        .cute-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .cute-item {
+            background: white;
+            border-radius: 30px;
+            padding: 0.8rem 1.4rem;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 0 #fcaac0, 0 10px 15px rgba(240, 100, 130, 0.2);
+            border: 2px solid white;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .cute-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 0 #fcaac0, 0 15px 20px rgba(240, 100, 130, 0.3);
+            background: #fff5f7;
+        }
+
+        .valentine-question {
+            background: #ffeef2;
+            border-radius: 70px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 3px solid white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #9e3e58;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .btn-yes, .btn-no {
+            border: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 1rem 2.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 3px solid white;
+            box-shadow: 0 10px 0 #b54763, 0 10px 20px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .btn-yes {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #ff3355;
+            transform: scale(1.05);
+            box-shadow: 0 12px 0 #b54763, 0 15px 25px #f08ca8;
+        }
+
+        .btn-no {
+            background: #c9c9c9;
+            color: #4a4a4a;
+            box-shadow: 0 10px 0 #8f8f8f;
+        }
+
+        .btn-no:hover {
+            background: #bbbbbb;
+        }
+
+        .response-message {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 50px;
+            background: white;
+            display: inline-block;
+            border: 4px solid #ffb6c1;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            color: #a04862;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            font-size: 1.2rem;
+        }
+
+        .footer-note i {
+            font-style: normal;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Скрытый элемент для ответа */
+        #answerContainer {
+            min-height: 100px;
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 550px) {
+            .envelope { padding: 2rem 1rem; }
+            h1 { font-size: 2rem; }
+            .heart-hug { font-size: 5rem; }
+            .ribbon { font-size: 0.9rem; padding: 0.5rem 1rem; }
+            .btn-yes, .btn-no { font-size: 1.4rem; padding: 0.8rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Падающие сердечки (создаются через JS) -->
+    <div id="fallingHeartsArea"></div>
+
+    <!-- Главный конверт-открытка -->
+    <div class="envelope">
+        <div class="ribbon">💕 БЕЗУМНО МИЛЫЙ САЙТ 💕</div>
+        
+        <!-- Оригинальное сердечко с ручками (как будто обнимает) -->
+        <div class="heart-hug">
+            <span>🤗</span>❤️<span>🤗</span>
+        </div>
+
+        <h1>С Днём Святого Валентина!</h1>
+        <div class="date-badge">💖 14 февраля 2026 💖</div>
+
+        <!-- Романтичный стишок (очень милый) -->
+        <div class="poem-box">
+            <p>
+                Ты как валентинка — яркий сюрприз,<br>
+                В сердце моём занял(а) целый карниз!<br>
+                Хочу подарить тебе тёплые строки,<br>
+                Чтоб день этот был без единой мороки ✨
+            </p>
+            <div class="signature">❤️ Твой тайный поклонник ❤️</div>
+        </div>
+
+        <!-- Милые штучки (grid) -->
+        <div class="cute-grid">
+            <div class="cute-item" title="Плюшевое сердечко">🧸</div>
+            <div class="cute-item" title="Коробка конфет">🍬</div>
+            <div class="cute-item" title="Поцелуйчик">😘</div>
+            <div class="cute-item" title="Конвертик">💌</div>
+            <div class="cute-item" title="Цветочек">🌷</div>
+            <div class="cute-item" title="Мишка">🐻‍❄️</div>
+            <div class="cute-item" title="Зефирка">☁️</div>
+            <div class="cute-item" title="Кексик">🧁</div>
+        </div>
+
+        <!-- Самый милый интерактив: вопрос с кнопками ДА/НЕТ (кнопка НЕТ убегает?) Но тут она просто меняет сообщение, но сделаем озорно: если нажимают "Нет", появляется милое "передумай"  -->
+        <div class="valentine-question">
+            ❓ Ты станешь моим валентинком? ❓
+        </div>
+
+        <div class="buttons-container">
+            <button class="btn-yes" id="yesBtn">❤️ ДА! ❤️</button>
+            <button class="btn-no" id="noBtn">💔 нет... 💔</button>
+        </div>
+
+        <!-- Место для ответа -->
+        <div id="answerContainer"></div>
+
+        <div class="footer-note">
+            <i>🌸</i> сделанно с любовью, специально для тебя <i>🌸</i>
+        </div>
+        <div style="margin-top: 1rem; opacity: 0.6; font-size: 0.9rem;">✨ нажми на сердечко, если меня любишь ✨</div>
+    </div>
+
+    <script>
+        (function() {
+            // ========== 1. ПАДАЮЩИЕ СЕРДЕЧКИ (очень мило) ==========
+            const heartsContainer = document.getElementById('fallingHeartsArea');
+            const heartSymbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '💔', '💖', '💗', '💘', '💝', '💞', '💕', '💓', '💟'];
+            
+            function createFallingHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                
+                // Случайное положение слева
+                heart.style.left = Math.random() * 100 + '%';
+                
+                // Случайный размер
+                const size = 1 + Math.random() * 2.2;
+                heart.style.fontSize = size + 'rem';
+                
+                // Случайная продолжительность падения (от 5 до 14 сек)
+                const duration = 5 + Math.random() * 12;
+                heart.style.animationDuration = duration + 's';
+                
+                // Небольшая задержка
+                heart.style.animationDelay = Math.random() * -10 + 's';
+                
+                // Иногда сердечки могут быть чуть ярче, иногда бледнее
+                heart.style.color = `rgba(255, 100, 130, ${0.1 + Math.random() * 0.25})`;
+                
+                document.body.appendChild(heart);
+                
+                // Удаляем после окончания анимации (чтобы не накапливались)
+                setTimeout(() => {
+                    if (heart.parentNode) heart.remove();
+                }, duration * 1000);
+            }
+
+            // Создаём сразу несколько штук
+            for (let i = 0; i < 18; i++) {
+                setTimeout(createFallingHeart, i * 300);
+            }
+
+            // Продолжаем создавать новые каждые 2 секунды
+            setInterval(createFallingHeart, 2000);
+
+            // ========== 2. ИНТЕРАКТИВ С КНОПКАМИ ==========
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const answerContainer = document.getElementById('answerContainer');
+
+            // Милые ответы (для "ДА")
+            const yesResponses = [
+                "💞 УРА! ТЫ САМЫЙ ЛУЧШИЙ ВАЛЕНТИНОК! 💞",
+                "🥰 Я ТАК СЧАСТЛИВ(А)! ТЫ ЧУДО! 🥰",
+                "💘 СЕРДЕЧКО РАЗБИВАЕТСЯ ОТ СЧАСТЬЯ! 💘",
+                "🍫 ТЕПЕРЬ У НАС БУДЕТ МНОГО КОНФЕТ! 🍫",
+                "✨ ТЫ СДЕЛАЛ(А) МОЙ ДЕНЬ! ✨",
+                "🐻 ОБНИМАШКИ НАВСЕГДА! 🐻",
+                "💖 НАВСЕГДА ТВОЙ(ТВОЯ) 💖"
+            ];
+
+            // Ответы для попытки нажать "НЕТ" (очень милые, чтобы передумали)
+            const noResponses = [
+                "😢 Ой... может быть, передумаешь? 😢",
+                "💔 Ну пожалуйста... нажми ДА! 💔",
+                "🥺 Я подарю тебе печеньку 🍪, нажми ДА!",
+                "😕 Может, всё-таки да? 😕",
+                "🌟 Ты самое лучшее, нажми ДА! 🌟",
+                "💫 Я знаю, ты хочешь нажать ДА! 💫",
+                "🌸 Давай всё-таки отпразднуем вместе? 🌸"
+            ];
+
+            // Обработчик ДА
+            yesBtn.addEventListener('click', function() {
+                answerContainer.innerHTML = ''; // очищаем
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'response-message';
+                
+                // Выбираем случайный тёплый ответ
+                const randomYes = yesResponses[Math.floor(Math.random() * yesResponses.length)];
+                responseDiv.textContent = randomYes;
+                
+                // Добавляем с маленькой конфетти-анимацией
+                answerContainer.appendChild(responseDiv);
+                
+                // Дополнительно маленькие сердечки вылетают
+                for (let i = 0; i < 6; i++) {
+                    setTimeout(() => {
+                        const mini = document.createElement('span');
+                        mini.innerHTML = '❤️';
+                        mini.style.position = 'fixed';
+                        mini.style.left = yesBtn.offsetLeft + yesBtn.offsetWidth / 2 + 'px';
+                        mini.style.top = yesBtn.offsetTop + yesBtn.offsetHeight / 2 + 'px';
+                        mini.style.fontSize = '2.5rem';
+                        mini.style.pointerEvents = 'none';
+                        mini.style.transition = 'all 1s ease-out';
+                        mini.style.transform = 'translate(-50%, -50%)';
+                        mini.style.zIndex = '9999';
+                        document.body.appendChild(mini);
+                        
+                        setTimeout(() => {
+                            mini.style.transform = `translate(${Math.random() * 200 - 100}px, -150px) scale(2)`;
+                            mini.style.opacity = '0';
+                        }, 20);
+                        
+                        setTimeout(() => mini.remove(), 1100);
+                    }, i * 120);
+                }
+            });
+
+            // Обработчик НЕТ (хитрый: вместо одного отказа показывает милые просьбы)
+            noBtn.addEventListener('click', function() {
+                answerContainer.innerHTML = ''; 
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'response-message';
+                responseDiv.style.background = '#f0dbdf';
+                responseDiv.style.borderColor = '#e6a0b5';
+                
+                const randomNo = noResponses[Math.floor(Math.random() * noResponses.length)];
+                responseDiv.textContent = randomNo;
+                
+                answerContainer.appendChild(responseDiv);
+
+                // Немного увеличиваем кнопку ДА, чтобы подсознательно хотелось нажать
+                yesBtn.style.transform = 'scale(1.1)';
+                setTimeout(() => yesBtn.style.transform = 'scale(1)', 500);
+                
+                // Кнопка "нет" слегка дрейфит (смещаем чуть-чуть для забавы)
+                noBtn.style.transform = 'translateX(5px)';
+                setTimeout(() => noBtn.style.transform = 'translateX(-5px)', 100);
+                setTimeout(() => noBtn.style.transform = 'translateX(0)', 200);
+            });
+
+            // Эффект нажатия на любое сердечко (заголовок) — дополнительная фишка
+            const heartHug = document.querySelector('.heart-hug');
+            if (heartHug) {
+                heartHug.addEventListener('click', function() {
+                    // Создадим облако маленьких сердечек
+                    for (let i = 0; i < 12; i++) {
+                        const span = document.createElement('span');
+                        span.innerHTML = '❤️';
+                        span.style.position = 'absolute';
+                        span.style.left = '50%';
+                        span.style.top = '50%';
+                        span.style.fontSize = '1.8rem';
+                        span.style.pointerEvents = 'none';
+                        span.style.transition = 'all 1s cubic-bezier(0.2, 0.9, 0.3, 1.2)';
+                        span.style.transform = 'translate(-50%, -50%)';
+                        span.style.zIndex = '100';
+                        heartHug.style.position = 'relative';
+                        heartHug.appendChild(span);
+                        
+                        setTimeout(() => {
+                            span.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * -150 - 30}px) scale(0.5)`;
+                            span.style.opacity = '0';
+                        }, 20);
+                        
+                        setTimeout(() => span.remove(), 1100);
+                    }
+                });
+            }
+        })();
+    </script>
+    <!-- Маленький скрытый сюрприз: звёздочки наведения -->
+</body>
+</html>
