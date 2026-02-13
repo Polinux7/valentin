@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 С Днём Святого Валентина 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #fce4e8; /* простой светлый фон */
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Главная карточка — белая, с четкими границами */
+        .card {
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 60px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(190, 60, 90, 0.25);
+            border: 2px solid #ffb6c1;
+            text-align: center;
+        }
+
+        /* Заголовок — жирный, тёмный, отлично читается */
+        h1 {
+            font-size: 3.5rem;
+            color: #b32e54;
+            margin: 20px 0 10px;
+            font-weight: 800;
+            text-shadow: none;
+        }
+
+        /* Сердечко статичное, без анимации */
+        .heart-static {
+            font-size: 7rem;
+            line-height: 1;
+            margin: 10px 0;
+            display: block;
+        }
+
+        /* Дата */
+        .date {
+            background: #ffe2ec;
+            color: #8f2b4a;
+            font-size: 1.6rem;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 15px 0;
+            border: 2px solid #ffb6c1;
+        }
+
+        /* Текст сообщения — крупный, тёмный, контрастный */
+        .message {
+            background: #fef6f8;
+            border: 3px solid #ffc1cf;
+            border-radius: 50px;
+            padding: 30px 25px;
+            margin: 25px 0;
+        }
+
+        .message p {
+            font-size: 1.8rem;
+            color: #3a1e28;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .message span {
+            display: block;
+            margin-top: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #b32e54;
+        }
+
+        /* Сетка с эмодзи — статичная, просто для украшения */
+        .emoji-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 35px 0;
+        }
+
+        .emoji-item {
+            background: #fce4e8;
+            padding: 15px 20px;
+            border-radius: 40px;
+            font-size: 2.2rem;
+            border: 2px solid #ffb6c1;
+            color: #3a1e28;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Вопрос */
+        .question {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #a52d51;
+            margin: 30px 0 20px;
+        }
+
+        /* Кнопки */
+        .buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .btn {
+            border: none;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 18px 45px;
+            border-radius: 60px;
+            cursor: pointer;
+            border: 3px solid white;
+            transition: 0.2s;
+        }
+
+        .btn-yes {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 8px 0 #b52b4a;
+        }
+
+        .btn-yes:hover {
+            background: #ff3355;
+            transform: scale(1.02);
+        }
+
+        .btn-no {
+            background: #d0d0d0;
+            color: #3d3d3d;
+            box-shadow: 0 8px 0 #8f8f8f;
+        }
+
+        .btn-no:hover {
+            background: #c0c0c0;
+        }
+
+        /* Ответ */
+        .answer-box {
+            background: #ffe2ec;
+            border-radius: 50px;
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #942d51;
+            border: 3px solid white;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Подвал */
+        .footer {
+            margin-top: 35px;
+            font-size: 1.4rem;
+            color: #a54864;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-top: 2px dashed #ffb6c1;
+            padding-top: 25px;
+        }
+
+        /* Для мобильных */
+        @media (max-width: 600px) {
+            .card { padding: 30px 20px; }
+            h1 { font-size: 2.5rem; }
+            .message p { font-size: 1.4rem; }
+            .btn { font-size: 1.6rem; padding: 15px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Статичное сердце -->
+        <div class="heart-static">❤️</div>
+
+        <!-- Заголовок чёткий -->
+        <h1>С Днём Святого Валентина!</h1>
+
+        <!-- Дата -->
+        <div class="date">💕 14 февраля 2026 💕</div>
+
+        <!-- Основное сообщение с хорошим контрастом -->
+        <div class="message">
+            <p>
+                Ты — самое тёплое, что есть в этом мире.<br>
+                Спасибо, что ты существуешь!
+            </p>
+            <span>❤️ Я тебя ценю ❤️</span>
+        </div>
+
+        <!-- Статичные эмодзи (просто картинки, не двигаются) -->
+        <div class="emoji-grid">
+            <div class="emoji-item">🥰 <span style="font-size: 1.2rem;">обожаю</span></div>
+            <div class="emoji-item">😘 <span style="font-size: 1.2rem;">целую</span></div>
+            <div class="emoji-item">🌹 <span style="font-size: 1.2rem;">цветы</span></div>
+            <div class="emoji-item">🍫 <span style="font-size: 1.2rem;">шоколад</span></div>
+            <div class="emoji-item">💌 <span style="font-size: 1.2rem;">письмо</span></div>
+            <div class="emoji-item">🐻 <span style="font-size: 1.2rem;">мишка</span></div>
+        </div>
+
+        <!-- Вопрос -->
+        <div class="question">
+            Ты станешь моим валентинком?
+        </div>
+
+        <!-- Кнопки -->
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="showYes()">ДА! ❤️</button>
+            <button class="btn btn-no" onclick="showNo()">нет 💔</button>
+        </div>
+
+        <!-- Ответ появится здесь -->
+        <div class="answer-box" id="answer">
+            💬 Нажми на кнопку выше
+        </div>
+
+        <!-- Подвал -->
+        <div class="footer">
+            <span>💖</span>
+            <span>с любовью, твоя Полина</span>
+            <span>💖</span>
+        </div>
+    </div>
+
+    <script>
+        function showYes() {
+            const messages = [
+                "💞 УРА! Ты сделал(а) мой день! 💞",
+                "🥰 Ты самый лучший валентинок! 🥰",
+                "💘 Наше сердце бьётся в унисон! 💘",
+                "✨ Я так счастлив(а)! ✨",
+                "🍫 Ты слаще любого шоколада! 🍫"
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('answer').innerHTML = randomMsg;
+        }
+
+        function showNo() {
+            const messages = [
+                "😢 Ну пожалуйста, нажми ДА! 😢",
+                "🥺 А если я очень попрошу? 🥺",
+                "💔 Не разбивай мне сердце... 💔",
+                "🌟 Давай всё-таки ДА? 🌟",
+                "🍪 Я дам тебе печеньку, если нажмёшь ДА! 🍪"
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('answer').innerHTML = randomMsg;
+            
+            // Увеличиваем кнопку ДА
+            const yesBtn = document.querySelector('.btn-yes');
+            yesBtn.style.transform = 'scale(1.1)';
+            setTimeout(() => yesBtn.style.transform = 'scale(1)', 300);
+        }
+    </script>
+</body>
+</html>
